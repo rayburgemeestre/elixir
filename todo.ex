@@ -22,10 +22,13 @@ defmodule TodoList do
   end
 
   def delete_entry(todo_list, id) do
+    # my solution
     case Map.pop(todo_list.entries, id) do
       {_, map} ->
         %TodoList{todo_list | entries: map}
     end
+    # book solution below
+    %TodoList{todo_list | entries: Map.delete(todo_list.entries, entry_id)}
   end
 
   def entries(todo_list, date) do
