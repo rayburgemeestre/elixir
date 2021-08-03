@@ -43,23 +43,26 @@ defmodule TodoList.TodoServer do
     end
   end
 
-  defp loop(%TodoList{} = list) do
-    list =
+  defp loop(todo_list) do
+    todo_list =
       receive do
-        message -> process_message(list, message)
+        message -> process_message(todo_list, message)
       end
 
-    loop(list)
+    loop(todo_list)
   end
 
-  defp process_message(%TodoList{} = list, {:add_entry, new_entry}) do
-    TodoList.add_entry(list, new_entry)
+  defp process_message(todo_list, {:add_entry, new_entry}) do
+    TodoList.add_entry(todo_list, new_entry)
   end
 
-  defp process_message(%TodoList{} = list, {:entries, sender, date}) do
-    send(sender, {:todo_entries, TodoList.entries(list, date)})
-    list
+  defp process_message(todo_list, {:entries, sender, date}) do
+    send(sender, {:todo_entries, TodoList.entries(todo_list, date)})
+    todo_list
   end
+
+  # book solution included something like this to avoid blocking messages
+  defp process_message(todo_list, _), do: todo_list
 end
 
 defmodule TodoList.Main do
