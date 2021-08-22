@@ -9,36 +9,37 @@ defmodule Todo.Database do
   end
 
   @impl true
-  def init(_) do
+  def init(state) do
     File.mkdir_p!(@db_file)
-    {:ok, nil}
+    {:ok, start_workers()}
+  end
+
+  # peeked at author's solution
+  defp start_workers() do
+    for index <- 0..2, into: %{} do
+      pid = Todo.DatabaseWorker.start(@db_file)
+      {index, pid}
+    end
+  end
+
+  def choose_worker(list_name) do
+    GenServer.call(__MODULE__, {:choose_worker, list_name})
   end
 
   def save(list_name, list) do
-    GenServer.cast(__MODULE__, {:save, list_name, list})
+    choose_worker(list_name)
+    |> Todo.DatabaseWorker.save(list_name, list)
   end
 
   def read(list_name) do
-    GenServer.call(__MODULE__, {:read, list_name})
+    choose_worker(list_name)
+    |> Todo.DatabaseWorker.read(a, list_name)
   end
 
   @impl true
-  def handle_cast({:save, list_name, list}, cache) do
-    Path.join(@db_file, list_name)
-    |> File.write!(:erlang.term_to_binary(list))
-    {:noreply, cache}
-  end
-
-  @impl true
-  def handle_call({:read, list_name}, _, cache) do
-    filename =
-      Path.join(@db_file, list_name)
-    list = case File.read(filename) do
-      {:ok, contents} ->
-        :erlang.binary_to_term(contents)
-      _ ->
-        nil
-    end
-    {:reply, list, cache}
+  def handle_call({:choose_worker, list_name}, _, state) do
+    index = :erlang.phash2(list_name, 3)
+    worker = Map.get(state, index)
+    {:reply, worker, state}
   end
 end

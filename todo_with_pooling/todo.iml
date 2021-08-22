@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="ELIXIR_MODULE" version="4">
   <component name="NewModuleRootManager">
-    <output url="file://$USER_HOME$/projects/elixir/todo/_build/dev/lib/todo/ebin" />
-    <output-test url="file://$USER_HOME$/projects/elixir/todo/_build/test/lib/todo/ebin" />
-    <content url="file://$USER_HOME$/projects/elixir/todo">
-      <sourceFolder url="file://$USER_HOME$/projects/elixir/todo/lib" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME$/projects/elixir/todo/spec" isTestSource="true" />
-      <sourceFolder url="file://$USER_HOME$/projects/elixir/todo/test" isTestSource="true" />
-      <excludeFolder url="file://$USER_HOME$/projects/elixir/todo/assets/node_modules/phoenix" />
-      <excludeFolder url="file://$USER_HOME$/projects/elixir/todo/assets/node_modules/phoenix_html" />
-      <excludeFolder url="file://$USER_HOME$/projects/elixir/todo/cover" />
-      <excludeFolder url="file://$USER_HOME$/projects/elixir/todo/deps" />
-      <excludeFolder url="file://$USER_HOME$/projects/elixir/todo/doc" />
-      <excludeFolder url="file://$USER_HOME$/projects/elixir/todo/logs" />
+    <output url="file://$USER_HOME$/projects/elixir/todo_with_pooling/_build/dev/lib/todo/ebin" />
+    <output-test url="file://$USER_HOME$/projects/elixir/todo_with_pooling/_build/test/lib/todo/ebin" />
+    <content url="file://$USER_HOME$/projects/elixir/todo_with_pooling">
+      <sourceFolder url="file://$USER_HOME$/projects/elixir/todo_with_pooling/lib" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/projects/elixir/todo_with_pooling/spec" isTestSource="true" />
+      <sourceFolder url="file://$USER_HOME$/projects/elixir/todo_with_pooling/test" isTestSource="true" />
+      <excludeFolder url="file://$USER_HOME$/projects/elixir/todo_with_pooling/assets/node_modules/phoenix" />
+      <excludeFolder url="file://$USER_HOME$/projects/elixir/todo_with_pooling/assets/node_modules/phoenix_html" />
+      <excludeFolder url="file://$USER_HOME$/projects/elixir/todo_with_pooling/cover" />
+      <excludeFolder url="file://$USER_HOME$/projects/elixir/todo_with_pooling/deps" />
+      <excludeFolder url="file://$USER_HOME$/projects/elixir/todo_with_pooling/doc" />
+      <excludeFolder url="file://$USER_HOME$/projects/elixir/todo_with_pooling/logs" />
     </content>
-    <orderEntry type="jdk" jdkName="Elixir at /home/trigen/elixir" jdkType="Elixir SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
