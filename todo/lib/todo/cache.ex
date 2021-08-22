@@ -3,6 +3,7 @@ defmodule Todo.Cache do
 
   def start do
     {:ok, pid} = GenServer.start(__MODULE__, %{})
+    Todo.Database.start()
     pid
   end
 
@@ -10,17 +11,17 @@ defmodule Todo.Cache do
   def init(_), do: {:ok, %{}}
 
   def get(cache, list_name) do
-    GenServer.call(cache, {:get, self(), list_name})
+    GenServer.call(cache, {:get, list_name})
   end
 
   @impl true
-  def handle_call({:get, sender, list_name}, _, todo_lists) do
+  def handle_call({:get, list_name}, _, todo_lists) do
     case Map.fetch(todo_lists, list_name) do
       {:ok, todo_list} ->
         {:reply, todo_list, todo_lists}
 
       :error ->
-        todo_list = Todo.Server.start()
+        todo_list = Todo.Server.start(list_name)
         todo_lists = Map.put(todo_lists, list_name, todo_list)
         {:reply, todo_list, todo_lists}
     end
